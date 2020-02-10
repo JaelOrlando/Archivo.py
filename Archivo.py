@@ -76,76 +76,76 @@ class Archivo: #Se crea la clase archivo
 		self.f.seek(0) #Declara a 0 la posisicion en el texto del archivo
 		return contador #Regresa el contador
 
-	def cuentaPalabras(self):
-		cadena2 = self.f.read()
-		npalabras = 0
-		np = cadena2.split()
-		npalabras = len(np)
-		print("Cantidad de palabras:",npalabras)
+	def cuentaPalabras(self):#Se define la funcion para contar palabras
+		cadena2 = self.f.read() #Se lee el texto del archivo
+		npalabras = 0 #Se define un contador igual a 0 
+		np = cadena2.split() #Sirve para dividir el texto por palabras
+		npalabras = len(np) #Cuenta el numero de divisiones
+		print("Cantidad de palabras:",npalabras) #Imprime el numero de palabras que hay en el texto
 
-	def cuentaLineas(self):
-		i = 0
-		for linea in self.f:
-			i += 1
-		print("Numero de lineas: ", i)
-		self.f.seek(0)
+	def cuentaLineas(self): #Se define la funcion para contar lineas
+		i = 0 #Se crea un contador igual a 0
+		for linea in self.f: #Sirve para que recorra el texto linea por linea
+			i += 1 #Aumenta el contador si es que cambia una linea
+		print("Numero de lineas: ", i) #Imprime el numero de lineas que hay en el texto
+		self.f.seek(0) #Se define el inicio en del texto en la posicion 0
 		
-	def cuentaMayusculas(self):
-		def mayusculas(s):
-			contador = 0
-			for i in range(len(s)):
-				if s[i] in set("ABCDEFGHIJKLMNÑOPKRSTUVWXYZ"):
-					contador += 1	
-			print("Mayusculas: ", contador)
-			return contador
-		contador = 0
-		for linea in self.f:
-			contador += mayusculas(linea)
-		self.f.seek(0)
-		return contador
+	def cuentaMayusculas(self): #Se define la funcion que cuenta mayusculas
+		def mayusculas(s): #Se define la funcion mayusculas y se le asigna a la variable s
+			contador = 0 #Contador igual a 0
+			for i in range(len(s)): #Para recorrer todo el texto del archivo
+				if s[i] in set("ABCDEFGHIJKLMNÑOPKRSTUVWXYZ"): #Compara si alguna letra mayuscula esta en la posicion i si es asi entra el if
+					contador += 1	#Aumenta el contador en 1 en caso de que haya alguna mayuscula
+			print("Mayusculas: ", contador) #Imprime cuantas mayusculas hay en el texto
+			return contador #Regresa el contador
+		contador = 0 #Contador igual a 0 
+		for linea in self.f: #Recorre el texto linea por linea
+			contador += mayusculas(linea) #Aumenta el contador en 1
+		self.f.seek(0) #Define el inicio del texto en la posicion 0
+		return contador  #Regresa el contador
 
-	def cuentaMinusculas(self):
-		def minusculas(s):
-			contador = 0
-			for i in range(len(s)):
-				if s[i] in set("abcdefghijklmnñopqrstuvwxyz"):
-					contador += 1	
-			print("Minusculas: ", contador)
-			return contador
-		contador = 0
-		for linea in self.f:
-			contador += minusculas(linea)
-		self.f.seek(0)
-		return contador
+	def cuentaMinusculas(self): #Se define la funcion cuenta minusculas
+		def minusculas(s): #Se define la funcion minusculas y se le asgina a la variable s
+			contador = 0 #Contador igual a 0
+			for i in range(len(s)): #Para recorrer todo el texto deñ archivo
+				if s[i] in set("abcdefghijklmnñopqrstuvwxyz"): #Compara si alguna letra minuscula esta en la posicion i si es asi entra el if
+					contador += 1	#Aumenta el contador
+			print("Minusculas: ", contador) #Imprime cuantas minusculas hay en el texto
+			return contador #Regresa el contador
+		contador = 0 #Contador igual a 0
+		for linea in self.f: #Recorre el texto linea por linea
+			contador += minusculas(linea) #Aumenta el contador en 1
+		self.f.seek(0) #Define el inicio del texto en la posicion 0
+		return contador #Regresa el contador
 
-	def copyfile(self):
-		fuente = "/home/kayle/Escritorio/UNI/8vo/Concurrente/PROGRAMAS/prueba.txt"
-		destino = "/home/kayle/Escritorio/UNI/8vo/Concurrente/PROGRAMAS/pruebaCOPIA.txt"
-		try:
-			shutil.copyfile(fuente, destino)
-			print("\nARCHIVO COPIADO CORRECTAMENTE\n")
-		except:
-			print("Error")
+	def copyfile(self): #Se define la funcion copyfile
+		fuente = "/home/kayle/Escritorio/UNI/8vo/Concurrente/PROGRAMAS/prueba.txt" #Se pone la ruta del archivo a copia
+		destino = "/home/kayle/Escritorio/UNI/8vo/Concurrente/PROGRAMAS/pruebaCOPIA.txt" #Se ingresa la ruta a donde se va a copiar el archivo
+		try: #Si no encuentra el archivo no lo hace
+			shutil.copyfile(fuente, destino) #Se utiliza la funcion shutil con los parametros fuente y destino
+			print("\nARCHIVO COPIADO CORRECTAMENTE\n") #Arroja un mensaje que se a copiado correctamente
+		except: #Si no encuentra el archivo manda error
+			print("Error") #Imprime error
 
-	def convierteMayuscula(self):
-		print("###############################################################################\nTEXTO EN MAYUSCULAS:")
-		for linea in self.f:
-			print("{}".format(linea.upper()))
-		print()
-		self.f.seek(0)
+	def convierteMayuscula(self): #Se define la funcion para convertir todo el texto a mayusculas
+		print("###############################################################################\nTEXTO EN MAYUSCULAS:") #Se imprime el mensaje para diferenciar desde donde las convierte
+		for linea in self.f: #Recorre el texto linea por linea
+			print("{}".format(linea.upper())) #Imprime el texto ya en mayusculas utilizando la funcion upper
+		print() #Imprime un salto de linea
+		self.f.seek(0) #Define el inicio del texto en la posicion 0
 
-	def convierteMinuscula(self):
-		print("###############################################################################\nTEXTO EN MINUSCULAS:")
-		for linea in self.f:
-			print("{}".format(linea.lower()))
-		print()
-		self.f.seek(0)
+	def convierteMinuscula(self): #Se define la funcion para convertir todo el texto a minusculas
+		print("###############################################################################\nTEXTO EN MINUSCULAS:") #Se imprime el mensaje para deferenciar desde donde las convierte
+		for linea in self.f: #Recorre el texto linea por linea
+			print("{}".format(linea.lower())) #Imprime el texto ya en minusculas utilizando la funcion lower
+		print() #Imprime un salto de linea
+		self.f.seek(0) #Define el inicio del texto en la posicion 0
 
-	def Hexadecimal(self):
-		s = self.f.read()
-		print("Texto convertido a hexadecimal\n")
-		for i in range(len(s)):
-			print(hex(ord(s[i])))
+	def Hexadecimal(self): #Se define la funcion hexadecimal
+		s = self.f.read() #Se le asigna a la variable s el texto del archivo
+		print("Texto convertido a hexadecimal\n") #Se imprime un mensaje para saber desde donde convirtio a hexadecimal
+		for i in range(len(s)): #Para recorrer todo el texto 
+			print(hex(ord(s[i]))) #Convierte la posicion i del texto a formato hexadecimal
 
 nomb = input("Nombre del archivo  \n") #Se pregunta que archivo se va a abrir
 archivo = Archivo(nomb) #
